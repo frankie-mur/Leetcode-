@@ -13,22 +13,13 @@ class Solution:
         while l1 and l2:
             #append to res using two pointer in non-decreasing order
             if l1.val < l2.val:
-                res.next = l1
-                l1 = l1.next
+                res.next, l1 = l1, l1.next
             else:
-                res.next = l2
-                l2 = l2.next
-            
+                res.next, l2 = l2, l2.next
+                
             res = res.next
         #if there are left over values
-        while l1:
-            res.next = l1
-            l1 = l1.next
-            res = res.next
-        while l2:
-            res.next = l2
-            l2 = l2.next
-            res = res.next
+        res.next = l1 or l2
         
         return dum.next
             
