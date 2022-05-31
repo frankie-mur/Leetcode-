@@ -10,16 +10,16 @@ class Solution:
         #dum node to remove at head
         dum = ListNode()
         dum.next = head
-        #if the value is at the begining, just move the head
-        while head and head.val == val:
-            head = head.next
-            dum.next = head
         #ponter to move through LL and check if next is val
         cur = dum
-        while cur and cur.next:
-            while cur.next and cur.next.val == val:
+        while cur.next:
+            #if the cur.next is val then "delete it"
+            if cur.next.val == val:
                 cur.next = cur.next.next
-            cur = cur.next
+            #this needs to be an else due to concurrent vals ex) 1->1->2->1->1
+            else:
+                cur = cur.next
         
+        #return the dummys next which is the real head
         return dum.next
                 
