@@ -23,14 +23,17 @@ class Solution:
             r_s = 10
             res = [1,3,6,10] (looks good)
         
-        E - 
+        E - Time: O(n) for looping through nums
+            Space: O(n) for running sum and resulting list
+        
+        Can we do better?
         
         '''
         
-        running_sum, res = 0, []
+        running_sum, = 0, 
         
-        for num in nums:
+        for i, num in enumerate(nums):
             running_sum += num
-            res.append(running_sum)
+            nums[i] = running_sum
         
-        return res
+        return nums
