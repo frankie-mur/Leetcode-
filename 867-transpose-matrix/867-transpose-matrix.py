@@ -5,10 +5,11 @@ class Solution:
         What is transpose? flipped over diangonal switching row's and column indices
         ex) [[1,2,3],[4,5,6]] -> [[1,4],[2,5],[3,6]] 
         M- Simulation
-        P- Create a res array of M*N, for loop need to go matrix[i][0] -> end and append to res[0][i]
-        I- 
-        R-
-        E-
+        P- Create a res array of M*N, for loop to append res[r][c] -> matrix[c][r] where r is row a c is column
+        I- coded below
+        R- seems okay
+        E- Space: O(n) for length of matrix
+           Time: O(n^2) for nested for loop through matrix 
         
         '''
         M = len(matrix)
