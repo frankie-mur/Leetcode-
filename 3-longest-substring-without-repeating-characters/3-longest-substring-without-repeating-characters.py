@@ -1,5 +1,6 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        #tip here is to only move left but not add to set, sliding window
         st = set()
         l,r = 0,0
         res = 0
