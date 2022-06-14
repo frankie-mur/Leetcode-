@@ -12,9 +12,10 @@ class Solution:
         
         I-python
         
-        R-
+        R-Passes test cases
         
-        E-
+        E- Time: O(nlogn) for the sort
+           Space: O(n) for freq map
         
         
         '''
