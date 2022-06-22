@@ -11,8 +11,9 @@ class Solution:
         M-Fast and slow pointer
         P-First find if there is a cycle, if there is then start a new pointer from the beginning and increment till the previous pointer and the new one collide, this is the start. Can be proven with math 
         I- Python
-        R-
-        E-
+        R- Works for all test cases
+        E- Time: O(n)
+            Space: O(1)
         '''
         slow,fast = head, head
         while fast and fast.next:
