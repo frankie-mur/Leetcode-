@@ -4,16 +4,12 @@ class Solution:
         heapify(mh)
 
         for num in nums:
-            heappush(mh, -1 * num)
+            heappush(mh, num)
             
-            #if len(mh) > k:
-            #    heappop(mh)
+            while len(mh) > k:
+                heappop(mh)
         
-        while k > 1:
-            heappop(mh)
-            k -= 1
-        
-        return -1 * heappop(mh)
+        return heappop(mh)
         
         
         
