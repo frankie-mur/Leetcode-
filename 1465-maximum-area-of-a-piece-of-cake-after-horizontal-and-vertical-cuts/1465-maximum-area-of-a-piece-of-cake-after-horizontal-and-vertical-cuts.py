@@ -6,7 +6,8 @@ class Solution:
         P- Sort both given arrays, compute the maximum difference between two consecutive elements in each array. Make sure to take array bounds into account
         I- python
         R - I think it passes all test casses, trying to think how to refactor to one loop
-        E - 
+        E - Time: O(nlogn + n + n) for the sort and two passes
+            Space: O(1) just for storing the answers
         '''
         horizontalCuts.sort()
         verticalCuts.sort()
