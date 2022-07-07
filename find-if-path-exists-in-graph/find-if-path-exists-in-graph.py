@@ -5,18 +5,33 @@ class Solution:
         for u,v in edges:
             adj_list[u].append(v)
             adj_list[v].append(u)
+            
+        q = deque([source])
+        visited = set([source])
+        while q:
+            for _ in range(len(q)):
+                cur = q.popleft()
+                if cur == destination:
+                    return True
+                
+                for nei in adj_list[cur]:
+                    if nei not in visited:
+                        visited.add(nei)
+                        q.append(nei)
+                
+        return False
+                    
         
-        def dfs(adj_list, node, destination,visited):
-            if node == destination:
-                return True
-            if node not in visited:
-                visited.add(node)
-                for neig in adj_list[node]:
-                    res = dfs(adj_list, neig, destination,visited)
-                    if res: return True
-            return False
+                
+            
+            
+            
+            
+                
+                    
+            
         
-        return dfs(adj_list, source, destination,set())
+        
         
                     
                     
