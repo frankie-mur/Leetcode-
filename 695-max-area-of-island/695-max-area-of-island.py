@@ -5,26 +5,22 @@ class Solution:
         keep a global max counter counting the area
         '''
         max_area = 0
-        visited = set()
-        cur_area = 0
+     
         def dfs(r,c):
             #counts the first 1
-            nonlocal cur_area
-            cur_area += 1
-            nonlocal max_area
-            max_area = max(cur_area, max_area)
-            visited.add((r,c))
-            for new_r,new_c in [(-1,0), (0,-1), (1,0), (0,1)]:
-                if r+new_r < 0 or r+new_r >= len(grid) or c+new_c < 0 or c+new_c >= len(grid[0]):
-                    continue
-                if grid[r+new_r][c+new_c] == 1 and (r+new_r,c+new_c) not in visited:                 
-                    dfs(r+new_r,c+new_c)
+            if r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or grid[r][c] == 0:
+                    return 0
+            #mark as visited
+            grid[r][c] = 0
+            print(r,c)
+            return 1 + dfs(r-1,c) + dfs(r+1,c) + dfs(r,c-1) + dfs(r,c+1)
+        
+        max_area = 0
         
         for r in range(len(grid)):
             for c in range(len(grid[0])):
-                if grid[r][c] == 1 and (r,c) not in visited:
-                    cur_area = 0
-                    dfs(r,c)
+                if grid[r][c] == 1:
+                    max_area = max(dfs(r,c), max_area)
                     
                     
         return max_area
