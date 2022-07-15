@@ -3,6 +3,7 @@ class Solution:
         #union find
         parents = [i for i in range(n)]
         self.nodes = n
+        rank = [1] * n
         
         def find(x):
             while parents[x] != x:
@@ -14,8 +15,16 @@ class Solution:
             rootX, rootY = find(x), find(y)
             
             if parents[rootX] != rootY:
+                #union by rank
+                if rank[rootX] > rank[rootY]:
+                    parents[rootY] = rootX
+                elif rank[rootX] < rank[rootY]:
+                    parents[rootX] = rootY
+                else:
+                    parents[rootY] = rootX
+                    rank[rootX] += 1
+                
                 self.nodes -= 1
-                parents[rootY] = rootX
         
         
         for u,v in edges:
