@@ -16,6 +16,7 @@ class Solution:
             for key in mx:
                 if c[key] < mx[key]:
                     found = False
+                    break
                 
             
             if found:
