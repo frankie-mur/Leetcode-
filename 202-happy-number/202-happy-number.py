@@ -9,17 +9,25 @@ class Solution:
         E- Time: O(n) with n being how many times to sum to 1 or loop 
             Space: O(n) from the set
         '''
+        
         seen = set()
-        ttl = 0
-        while ttl != 1:
-            ttl = 0
-            for num in str(n):
-                ttl += int(num) ** 2
-            if ttl in seen:
+        
+        while n != 1:
+            if n in seen:
                 return False
-            seen.add(ttl)
-            n = ttl
+            seen.add(n)
+            total = 0
+            
+            while n:
+                total += (n % 10) ** 2
+                n = n // 10
+                
+            n = total
+            
+        return True
+        
+    
 
         
-        return True
+        
             
