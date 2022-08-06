@@ -6,25 +6,30 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        #get the values in-order they should all be in asceding order
-        vals = []
+        #from root every value to its left should be less thatn it, and right should be greater
+ 
         def dfs(root):
             if not root:
-                return
+                return True
             
-            dfs(root.left)
-            nonlocal vals
-            vals.append(root.val)
-            dfs(root.right)
+            if dfs(root.left) == False:
+                return False
+            
+            if root.val <= self.prev:
+                return False
+    
+            self.prev = root.val
+            
+            return dfs(root.right)
+            
         
-        dfs(root)
-        return sorted(set(vals)) == vals
+        self.prev = -math.inf
+        return dfs(root)
         
         
         
         
         
         
-      
         
             
