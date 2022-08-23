@@ -11,20 +11,28 @@ class Solution:
         '''
         
         seen = set()
-        total = 0
         
-        while True:
+        def sum_of_square_digits(n):
+            total = 0
             while n:
                 total += (n % 10) ** 2
-                n = n // 10 
-            if total in seen:
-                return False
-            seen.add(total)
-            if total == 1:
-                return True
+                n = n // 10
+            return total
+        
+        while n != 1 and n not in seen:
+            seen.add(n)
+            n = sum_of_square_digits(n)
+        
+        return n == 1
+        
             
-            n = total
-            total = 0
+        
+            
+            
+            
+            
+            
+            
         
         
             
