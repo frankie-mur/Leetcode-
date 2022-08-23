@@ -11,21 +11,23 @@ class Solution:
         '''
         
         seen = set()
+        total = 0
         
-        while n != 1:
-            if n in seen:
-                return False
-            seen.add(n)
-            total = 0
-            
+        while True:
             while n:
                 total += (n % 10) ** 2
-                n = n // 10
-                
-            n = total
+                n = n // 10 
+            if total in seen:
+                return False
+            seen.add(total)
+            if total == 1:
+                return True
             
-        return True
+            n = total
+            total = 0
         
+        
+            
     
 
         
