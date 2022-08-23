@@ -1,22 +1,30 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        #tip here is to only move left but not add to set, sliding window
-        st = set()
-        l,r = 0,0
-        res = 0
-        while r < len(s):
-            rch = s[r]
-            if rch not in st:
-                st.add(rch)
-                res = max(res, len(st))
-                r += 1
+        seen = set()
+        L, R = 0, 0
+        n = len(s)
+        longest = 0
+        
+        while R < n:
+            right = s[R]
+            if right in seen:
+                left = s[L]
+                seen.remove(left)
+                L += 1
+                
             else:
-                lch = s[l]
-                st.remove(lch)
-                l += 1
-        return res
+                seen.add(right)
+                R += 1
+            
+            longest = max(longest, R - L)
+            
+        return longest
                 
                 
+                
+        
+
+
             
                 
                 
