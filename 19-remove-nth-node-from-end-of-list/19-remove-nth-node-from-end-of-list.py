@@ -6,31 +6,29 @@
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         '''
-        remove nth from end, how do we get there?
-        dummy head to help with edge cases
-        two pointer, move n spots with first then start second at head move both until first reaches end, second will be at nth end - 1
-        ex)
-        0->1->2->3->4->5    n = 2
-        p2    p1
+        U - Given a linked list we want to remove the n'th node from the end of the list and return the lists head
+        M - Fast and slow pointer? 
+        P - In order to get to the N'th from end in one pass we can use a two pointer technique, we start the fast pointer and decrement n for every next. Once n is below zero we can increment the slow pointer. When fast reaches the end then it will be one before the n'th. Then we can make the slow pointer next = next.next
+        I - Python
+        R - Seems to pass odd casses
+        E - Time: O(N) One pass throught the list
+            Space: O(1)
         
-        1->2->3->4->5
-              p2    p1
-              
-        set p2->next to next->next
+        
         '''
-        dum = ListNode()
-        dum.next = head
         
-        start, end = dum,head
+        dummy = ListNode(-1)
+        dummy.next = head
+        slow,fast = dummy,dummy
         
-        while end and end.next:
-            end = end.next
+        while fast.next:
+            fast = fast.next
             n -= 1
-            if n <= 0:
-                start = start.next
+            if n < 0:
+                slow = slow.next
         
-            
-        start.next = start.next.next
+        slow.next = slow.next.next
+    
         
+        return dummy.next
             
-        return dum.next
