@@ -1,15 +1,17 @@
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
         '''
-        awesome solution here, implements vertical scanning using the zip method. We use * to unpack 
-        and the set to make sure they are all the same chars.
+        U - Find the longest common prefix among an array of strings
+        M - Pointers all across?, or use cool zip pattern
+        P - 
         
         '''
-        res = ''
+        
+        res = ""
+        
         for ch in zip(*strs):
-            if len(set(ch)) != 1:
+            if len(set(ch)) > 1:
                 break
             res += ch[0]
         
         return res
-        
