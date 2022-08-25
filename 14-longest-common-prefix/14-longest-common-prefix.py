@@ -7,11 +7,10 @@ class Solution:
         
         '''
         
-        res = ""
-        
-        for ch in zip(*strs):
-            if len(set(ch)) > 1:
-                break
-            res += ch[0]
-        
-        return res
+
+        pre = strs[0]
+        for i in strs:
+            while not i.startswith(pre):
+                pre = pre[:-1]
+            
+        return pre     
