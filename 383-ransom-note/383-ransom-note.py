@@ -3,9 +3,11 @@ class Solution:
         freq = collections.Counter(magazine)
         
         for ch in ransomNote:
-            freq[ch] -= 1
-            if freq[ch] < 0:
+            if ch in freq:
+                freq[ch] -= 1
+                if freq[ch] < 0:
+                    return False
+            else:
                 return False
         
         return True
-                
