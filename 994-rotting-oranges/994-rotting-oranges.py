@@ -1,41 +1,42 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
-        #bfs rotten and count 4-dir layers that contain a fresh
-        #multi source bfs, first time doint this
-        R,C = len(grid), len(grid[0])
-        sec, fresh = 0, 0
-        q = deque([])
-        #first count the number of fresh oranges as well as start q of rotten source oranges
+        #multisource bfs
+        #first find all the rotten oranges
+        R, C = len(grid), len(grid[0])
+        origin = deque()
+        fresh = 0
+        minutes = 0
+        
         for r in range(R):
             for c in range(C):
                 if grid[r][c] == 2:
-                    q.append((r,c))
+                    origin.append((r,c))
                 elif grid[r][c] == 1:
                     fresh += 1
         
+        DIRS = [(-1,0), (0,-1), (1, 0), (0, 1)]
         
-        #now we start the multisource bfs
-        while q and fresh > 0:
-            size = len(q)
+        def is_valid(r, c):
+            if c >= 0 and c < C and r >= 0 and r < R and grid[r][c] == 1:
+                return True
+            return False
+        
+        while origin and fresh > 0:
+            size = len(origin)
             for _ in range(size):
-                r, c = q.popleft()
+                r, c = origin.popleft()
                 
-                for dr, dc in [(-1,0), (0, -1), (1, 0), (0, 1)]:
-                    #check bounds and if fresh
-                    row, col = r + dr, c + dc
-                    if row < 0 or row == R or col < 0 or col == C or grid[row][col] != 1:
-                        continue
-                    #mark rotten
-                    grid[row][col] = 2
-                    q.append((row, col))
-                    fresh -= 1
+                for dr, dc in DIRS:
+                    newr, newc = r + dr, c + dc
+                    if is_valid(newr, newc):
+                        grid[newr][newc] = 2
+                        origin.append((newr, newc))
+                        fresh -= 1
                 
-            sec += 1
-            
-            
-        return sec if fresh == 0 else -1 
+            minutes += 1
+                        
                 
-            
-            
-            
+                
+        return minutes if fresh == 0 else -1
+        
         
