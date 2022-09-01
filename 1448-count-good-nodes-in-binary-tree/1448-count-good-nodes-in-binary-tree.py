@@ -13,10 +13,11 @@ class Solution:
             if not node:
                 return
             
-            if max_so_far <= node.val:
-                good += 1
+   
             
             dfs(node.left, max(node.val, max_so_far))
+            if max_so_far <= node.val:
+                good += 1
             dfs(node.right, max(node.val, max_so_far))
         
         dfs(root, -math.inf)
