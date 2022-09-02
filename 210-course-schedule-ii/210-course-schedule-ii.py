@@ -1,15 +1,16 @@
 class Solution:
-    def findOrder(self, numCourses: int, preqs: List[List[int]]) -> List[int]:
-        #implement khans topological sort
-        graph = defaultdict(list)
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        order = []
+        
         indegree = {i:0 for i in range(numCourses)}
         
-        for u, v in preqs:
-            graph[v].append(u)
-            indegree[u] += 1
-
-            
+        graph = defaultdict(list)
         source = deque([])
+        
+        for v, u in prerequisites:
+            graph[u].append(v)
+            indegree[v] += 1
+        
         
         for key,val in indegree.items():
             if val == 0:
@@ -29,6 +30,4 @@ class Solution:
         
         
         return res if index == numCourses else []
-             
-        
             
