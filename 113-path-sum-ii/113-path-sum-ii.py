@@ -12,15 +12,15 @@ class Solution:
                 return
             
             cur_sum += node.val
-            cur_path.append(node.val)
-            if not node.left and not node.right and cur_sum == targetSum:
-                nonlocal res
-                res.append(cur_path.copy())
             
-            dfs(node.left, cur_path, cur_sum)
-            dfs(node.right, cur_path, cur_sum)
-            cur_path.pop()
-        
+            if not node.left and not node.right and cur_sum == targetSum:
+                cur_path += [node.val]
+                res.append(cur_path)
+                #return
+                
+            dfs(node.left, cur_path + [node.val], cur_sum)
+            dfs(node.right, cur_path + [node.val], cur_sum)
+            
         
         res = []
         dfs(root, [], 0)
