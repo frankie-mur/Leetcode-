@@ -5,32 +5,36 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        #flip second half and two pointer compare
-        def reverse(head):
+        #reverse second half and two pointer through both
+        def rev(node):
             prev = None
-            while head:
-                temp = head.next
-                head.next = prev
-                #this needs to be before head = temp 
-                prev = head
-                head = temp
-                
+            while node:
+                temp = node.next
+                node.next = prev
+                prev = node
+                node = temp
             
             return prev
         
-        fast,slow = head, head
         
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+        def get_mid(head):
+            slow, fast = head, head
+            
+            while fast and fast.next:
+                fast = fast.next.next
+                slow = slow.next
+            
+            return slow
         
         
-        second_head = reverse(slow)
-        while head and second_head:
-            if head.val != second_head.val:
+        mid = rev(get_mid(head))
+        
+        while head and mid:
+            
+            if head.val != mid.val:
                 return False
             head = head.next
-            second_head = second_head.next
+            mid = mid.next
         
         return True
-                
+        
