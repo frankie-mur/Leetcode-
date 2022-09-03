@@ -1,33 +1,37 @@
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        order = []
-        
-        indegree = {i:0 for i in range(numCourses)}
+        #khans top sort
+        source = deque([])
+        res = [0 for _ in range(numCourses)]
         
         graph = defaultdict(list)
-        source = deque([])
+        indegree = {i:0 for i in range(numCourses)}
         
-        for v, u in prerequisites:
-            graph[u].append(v)
-            indegree[v] += 1
+        for course, pre in prerequisites:
+            graph[pre].append(course)
+            indegree[course] += 1
+        
+        for course, inde in indegree.items():
+            if inde == 0:
+                source.append(course)
         
         
-        for key,val in indegree.items():
-            if val == 0:
-                source.append(key)
         
         index = 0
-        res = [0 for _ in range(numCourses)]
         while source:
-            course = source.popleft()
-            res[index] = course
-            index += 1
-            
-            for nei in graph[course]:
-                indegree[nei] -= 1
-                if indegree[nei] == 0:
-                    source.append(nei)
-        
+            size = len(source)
+            for _ in range(size):
+                
+                course = source.popleft()
+                res[index] = course
+                index += 1
+                
+                for nei in graph[course]:
+                    indegree[nei] -= 1
+                    if indegree[nei] == 0:
+                        source.append(nei)
         
         return res if index == numCourses else []
-            
+    
+        
+        
