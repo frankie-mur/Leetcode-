@@ -6,16 +6,16 @@ class Solution:
         intervals.sort()
         
         res = []
+        n = len(intervals)
         start, end = intervals[0][0], intervals[0][1]
-        for idx in range(1,len(intervals)):
-            next_start, next_end  = intervals[idx][0], intervals[idx][1]
-            if end >= next_start:
-                end = max(end, next_end)
+        for first, second in intervals:
+            if end >= first:
+                end = max(end, second)
             else:
                 res.append([start,end])
-                start, end = next_start, next_end
-                
-        res.append([start,end])        
-                
+                start = first
+                end = second
+        
+        res.append([start,end])
+        
         return res
-            
