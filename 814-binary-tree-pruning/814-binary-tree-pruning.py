@@ -6,33 +6,19 @@
 #         self.right = right
 class Solution:
     def pruneTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        #brute force, find nodes with zero and check if all subtrees are zero
-        
-        def subtree_zero(node):
+        def postorder(node):
             if not node:
-                return True
+                return None
             
-            if node.val == 1:
-                return False
+            node.left = postorder(node.left)
+            node.right = postorder(node.right)
+            if node.val == 0 and not node.right and not node.left:
+                return None
             
-            return node.val == 0 and subtree_zero(node.left) and subtree_zero(node.right)
+            return node
+            
+            
+        return postorder(root)
         
         
-        def dfs(root):
-            if not root:
-                return
-            
-            #print(root.left, subtree_zero(root.left))
-            if root.left and root.left.val == 0 and subtree_zero(root.left):
-                root.left = None
-            
-            if root.right and root.right.val == 0 and subtree_zero(root.right):
-                root.right = None
-            
-            dfs(root.left)
-            dfs(root.right)
         
-        dummy = TreeNode()
-        dummy.right = root
-        dfs(dummy)
-        return dummy.right
