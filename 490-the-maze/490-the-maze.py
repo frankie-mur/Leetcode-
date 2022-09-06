@@ -3,7 +3,7 @@ class Solution:
         #bfs?
         R, C = len(maze), len(maze[0])
         visited = set()
-        q = deque([start])
+        stack = [start]
         DIRS = [(-1,0), (0,-1), (1,0), (0,1)]
         
         def roll(r, c, dr, dc):
@@ -13,8 +13,8 @@ class Solution:
             
             return r, c
         
-        while q:
-            r, c = q.popleft()
+        while stack:
+            r, c = stack.pop()
             visited.add((r,c))
             #print(r,c)
             if [r,c] == destination:
@@ -25,7 +25,7 @@ class Solution:
                 #print(newr, newc)
                 if (newr, newc) not in visited:
                     # visited.add((newr, newc))
-                    q.append((newr,newc))
+                    stack.append((newr,newc))
         
         
         return False
