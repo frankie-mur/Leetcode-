@@ -3,7 +3,7 @@ class Solution:
         if not nums: return []                      
         min_closest = math.inf
         nums.sort()
-        res = 0
+        
         
         def find_target(num, idx):
             l = idx + 1
@@ -20,10 +20,7 @@ class Solution:
                     r -= 1
                 else:
                     l += 1
-                
-              
-          
-            
+
                     
         for idx,num in enumerate(nums):            
             find_target(num, idx)
