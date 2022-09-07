@@ -7,6 +7,7 @@ class TrieNode:
 class Trie:
     def __init__(self):
         self.root = TrieNode()
+        self.cur = self.root
     
     def add_word(self, word):
         cur = self.root
@@ -20,16 +21,14 @@ class Trie:
                 cur.suggestions.append(word)
                 cur.n += 1
     
-    def search_prefix(self, prefix):
+    def search_prefix(self, ch):
         #we want to go to the end of the prefix
-        cur = self.root
-        for ch in prefix:
-            if ch not in cur.children:
-                return ''
-            
-            cur = cur.children[ch]
-        
-        return cur.suggestions
+        if self.cur and ch in self.cur.children:
+            self.cur = self.cur.children[ch]
+            return self.cur.suggestions
+        else:
+            self.cur = []
+            return ''
         
     
 class Solution:
@@ -40,12 +39,8 @@ class Solution:
         for word in sorted(products):
             root.add_word(word)
         s = ""
-        for ch in searchWord:
-            s += ch
-            words = root.search_prefix(s)
-            res.append(words)
         
-        return res
+        return [root.search_prefix(ch) for ch in searchWord]
         
         
         
