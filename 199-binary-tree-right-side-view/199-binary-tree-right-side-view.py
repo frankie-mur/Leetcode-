@@ -6,39 +6,25 @@
 #         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        '''
-        Simple BFS on tree,
-        Only takng the last (leftmost) node.
-        '''
-        if not root:
-            return
-        
-        q = deque([root])
         res = []
+        #bfs
+        q = deque()
+        if root:
+            q.append(root)
         
         while q:
             size = len(q)
-            for i in range(size):
-                cur_node = q.popleft()
+            for _ in range(size):
+                node = q.popleft()
                 
-                if i == size - 1:
-                    res.append(cur_node.val)
+                if node.left:
+                    q.append(node.left)
                 
-                if cur_node.left:
-                    q.append(cur_node.left)
-                
-                if cur_node.right:
-                    q.append(cur_node.right)
+                if node.right:
+                    q.append(node.right)
+            
+            res.append(node.val)
+        
         
         return res
-                
-                
-                
-                
-
-
-
-
-
-
-
+            
