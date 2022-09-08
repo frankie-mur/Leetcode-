@@ -5,17 +5,19 @@ class Solution:
         
         intervals.sort()
         
-        res = []
         n = len(intervals)
-        start, end = intervals[0][0], intervals[0][1]
-        for first, second in intervals:
-            if end >= first:
-                end = max(end, second)
+        res = []
+        start,end = intervals[0][0], intervals[0][1]
+        
+        for i in range(n):
+            nxt_start, nxt_end = intervals[i]
+            if end >= nxt_start:
+                end = max(end, nxt_end)
             else:
                 res.append([start,end])
-                start = first
-                end = second
+                start = nxt_start
+                end = nxt_end
         
-        res.append([start,end])
+        res.append([start, end])
         
         return res
