@@ -1,42 +1,17 @@
 class Solution:
     def maxArea(self, h: int, w: int, horizontalCuts: List[int], verticalCuts: List[int]) -> int:
-        '''
-        U- given a cake size h x w and two arrays of intergers that represent horizantal and vertical cuts, return the max area of a piece of cake after the cuts are preformed
-        M- Simulation? Array? Greedy.
-        P- Sort both given arrays, compute the maximum difference between two consecutive elements in each array. Make sure to take array bounds into account
-        I- python
-        R - I think it passes all test casses, trying to think how to refactor to one loop
-        E - Time: O(nlogn + n + n) for the sort and two passes
-            Space: O(1) just for storing the answers
-        '''
         horizontalCuts.sort()
         verticalCuts.sort()
-        max_horizontal, max_vertical = 0,0
-        for i in range(len(horizontalCuts)):
-            if i == 0:
-                max_horizontal = max(max_horizontal, abs(horizontalCuts[i] - 0))
-            if i == len(horizontalCuts) - 1:
-                max_horizontal = max(max_horizontal, abs(horizontalCuts[i] - h))
-            if i < len(horizontalCuts)-1:
-                max_horizontal = max(max_horizontal, abs(horizontalCuts[i+1] - horizontalCuts[i]))     
-            
-        for i in range(len(verticalCuts)):
-            if i == 0:
-                max_vertical = max(max_vertical, abs(verticalCuts[i] - 0))
-            if i == len(verticalCuts) - 1:
-                max_vertical = max(max_vertical, abs(verticalCuts[i] - w))
-            if i < len(verticalCuts)-1:
-                max_vertical = max(max_vertical, abs(verticalCuts[i+1] - verticalCuts[i]))     
-      
-        return (max_horizontal * max_vertical) % (10**9 + 7)
-                
-                                     
+        horizontalCuts = [0] + horizontalCuts + [h]
+        verticalCuts = [0] + verticalCuts + [w]
+        maxHor = 0
+        maxVer = 0
+        for i in range(1, len(horizontalCuts)):
+            maxHor = max(maxHor, horizontalCuts[i] - horizontalCuts[i-1])
         
-                        
-                                    
-            
+        for i in range(1, len(verticalCuts)):
+            maxVer = max(maxVer, verticalCuts[i] - verticalCuts[i-1])
+        print(maxHor, maxVer)
+        return (maxHor * maxVer) % (10 ** 9 + 7)
         
-                                
-                
-            
-        
+    
