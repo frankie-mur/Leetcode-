@@ -1,21 +1,22 @@
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
-        N = len(nums)
-        visited = set()
         res = []
-        def rec(perm = []):
-            if len(perm) == N:
-                res.append(perm[:])
+        visited = set()
+        def dfs(cur_perm):
+            if len(cur_perm) == len(nums):
+                res.append(cur_perm.copy())
                 return
             
             for num in nums:
                 if num not in visited:
+                    cur_perm.append(num)
                     visited.add(num)
-                    perm.append(num)
-                    rec(perm)
+                    dfs(cur_perm)
+                    cur_perm.remove(num)
                     visited.remove(num)
-                    perm.remove(num)
-            
-        rec()
+        
+        dfs([])
         return res
-            
+                    
+                
+                
