@@ -1,49 +1,18 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        count = 0
         prefix = defaultdict(int)
         cur_sum = 0
-        
+        res = 0
         for num in nums:
             cur_sum += num
-            
-            #from the begining
+            #left to right
             if cur_sum == k:
-                count += 1
+                res += 1
             
-            count += prefix[cur_sum - k]
-            
+            target = cur_sum - k
+            res += prefix[target]
             prefix[cur_sum] += 1
-            
-            
-            
-        return count
-    
-    
-    '''
-    class Solution:
-    def subarraySum(self, nums, k):
-        count = curr_sum = 0
-        h = defaultdict(int)
         
-        for num in nums:
-            # current prefix sum
-            curr_sum += num
+        return res
             
-            # situation 1:
-            # continuous subarray starts 
-            # from the beginning of the array
-            if curr_sum == k:
-                count += 1
-            
-            # situation 2:
-            # number of times the curr_sum − k has occurred already, 
-            # determines the number of times a subarray with sum k 
-            # has occurred up to the current index
-            count += h[curr_sum - k]
-            
-            # add the current sum
-            h[curr_sum] += 1
-                
-        return count
-    '''
+        
