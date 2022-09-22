@@ -10,8 +10,7 @@ class Solution:
                 if ch in broken:
                     typed_words -= 1
                     break
-        
-        
+
         return typed_words
             
                 
