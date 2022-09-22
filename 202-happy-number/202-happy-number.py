@@ -6,25 +6,26 @@ class Solution:
         P- Copy the instructions into code, use a seen set to check for a loop 
         I- coded in python 
         R- code seems to run fine, cant think of any edge cases
-        E- Time: O(n) with n being how many times to sum to 1 or loop 
+        E- Time: O(logn) with n being how many times to sum to 1 or loop 
             Space: O(n) from the set
         '''
         
         seen = set()
-        
-        def sum_of_square_digits(n):
-            total = 0
+        cur = 0
+        while True:
             while n:
-                total += (n % 10) ** 2
+                cur += (n%10) ** 2
                 n = n // 10
-            return total
+            if cur in seen:
+                return False
         
-        while n != 1 and n not in seen:
-            seen.add(n)
-            n = sum_of_square_digits(n)
+            if cur == 1:
+                return True
+            seen.add(cur)
+            n = cur
+            cur = 0
         
-        return n == 1
-        
+        return -1
             
         
             
