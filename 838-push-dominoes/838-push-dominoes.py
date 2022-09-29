@@ -1,29 +1,33 @@
 class Solution:
     def pushDominoes(self, dominoes: str) -> str:
-        dom = list(dominoes)
+        #bfs
         q = deque()
-        
-        for i, d in enumerate(dom):
-            if d != ".":
-                q.append((i, d))
+        dominoes = list(dominoes)
+        for i, dom in enumerate(dominoes):
+            if dom == ".":
+                continue
+            
+            q.append((dom, i))
         
         
         while q:
-            i, d = q.popleft()
+            dom, i = q.popleft()
             
-            if d == "L":
-                if i > 0 and dom[i - 1] == ".":
-                    q.append((i - 1, "L"))
-                    dom[i - 1] = "L"
-        
-            elif d == "R":
-                if i + 1 < len(dom) and dom[i + 1] == ".":
-                    if i + 2 < len(dom) and dom[i + 2] == "L":
+            if dom == "L":
+                
+                if i - 1 >= 0 and dominoes[i-1] == ".":
+                    dominoes[i - 1] = "L"
+                    q.append(("L", i - 1))
+                
+            elif dom == "R":
+
+                if i + 1 < len(dominoes) and dominoes[i + 1] == ".":
+                    if i + 2 < len(dominoes) and dominoes[i + 2] == "L":
                         q.popleft()
                     
                     else:
-                        q.append((i + 1, "R"))
-                        dom[i + 1] = "R"
-            
+                        dominoes[i + 1] = "R"
+                        q.append(("R", i + 1))
         
-        return "".join(dom)
+        return "".join(dominoes)
+            
