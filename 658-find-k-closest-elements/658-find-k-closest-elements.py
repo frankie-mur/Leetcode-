@@ -17,14 +17,14 @@ class Solution:
         
         for num in arr:
             dist = abs(num - x)
-            heappush(heap, (dist, num))
+            heappush(heap, (-dist, -num))
             
             #space optimiztion?
-            #if len(heap) > k:
-            #   heappop(heap)
+            if len(heap) > k:
+               heappop(heap)
         
         while k:
-            res.append(heappop(heap)[1])
+            res.append(-heappop(heap)[1])
             k -= 1
         
         return sorted(res)
