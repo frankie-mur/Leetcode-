@@ -1,6 +1,5 @@
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
-        nums.sort()
         seen = set(nums)
         res = []
         res.extend([key for key,val in Counter(nums).items() if val == 2])
