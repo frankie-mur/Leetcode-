@@ -1,14 +1,16 @@
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
-        seen = set(nums)
-        res = []
-        res.extend([key for key,val in Counter(nums).items() if val == 2])
-        for i in range(len(nums)):
-            if i + 1 not in seen:
-                res.append(i + 1)
-                break
+        freq = Counter(nums)
+        dup, mis = 0, 0
+        for i in range(1,len(nums) + 1):
+            if i in freq:
+                if freq[i] == 2:
+                    dup = i
+            else:
+                mis = i
         
-        return res
+        return [dup, mis]
+            
             
         
         
