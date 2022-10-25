@@ -1,22 +1,16 @@
 class Solution:
-	def maxLength(self, arr):
-		self.maximum = 0
-
-		def backtrack(start,s):
-			if len(s)==len(set(s)):
-				self.maximum = max(self.maximum,len(s))
-			else:
-				return
-			for i in range(start,len(arr)):
-				backtrack(i+1,s + arr[i])
-
-		backtrack(0,"")
-		return self.maximum
-                    
-                        
-                    
-                    
-                
-                    
-                
+    def maxLength(self, arr: List[str]) -> int:
+        self.max = 0
+        
+        def bt(idx, cur_str):
+            if len(cur_str) == len(set(cur_str)):
+                self.max = max(len(cur_str), self.max)
+            else:
+                return
             
+            for i in range(idx, len(arr)):
+                bt(i, cur_str + arr[i])
+        
+        
+        bt(0, "")
+        return self.max
