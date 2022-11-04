@@ -9,9 +9,9 @@ class Solution:
                 s[l], s[r] = s[r], s[l]
                 l += 1
                 r -= 1
-            elif s[l] in vowels and s[r] not in vowels:
+            elif s[l] in vowels:
                 r -= 1
-            elif s[l] not in vowels and s[r] in vowels:
+            elif s[r] in vowels:
                 l += 1
             else:
                 l += 1
